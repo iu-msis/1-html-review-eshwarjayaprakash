@@ -46,7 +46,7 @@
     </header>
     <main class="main">
 
-        <table class="table">
+        <table id="sortytab" class="table">
             <thead>
               <tr>
                 <th scope="col" class="writings">Serial number</th>
@@ -139,5 +139,10 @@
         <p>phone number: (763)334-4308</p>
         <!-- https://www.w3schools.com/tags/tag_footer.asp -->
     </footer> 
+    <script src="js/tablesort.min.js"></script>
+    <script>
+      <!-- tablesort plugin from http://tristen.ca/tablesort/demo/-->
+      new Tablesort(document.getElementById('sortytab'));
+    </script>
  </body>
 </html>
