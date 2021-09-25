@@ -56,7 +56,7 @@
       <div id="offerApp" class="container">
         <div class="row">
           <div class="col">
-            <a href="img/rvp.jpg_background=000000&cropX1=97&cropX2=674&cropY1=122&cropY2=699" target="_blank">
+            <a v-bind:href="person.picture.large" target="_blank">
             <img v-bind:src="person.picture.large" alt="placeholder photo">
             </a>
             <p><cite>Potrait photo; </cite>photo by Randomuser.me</p>
@@ -67,6 +67,9 @@
             <p class="writings">AGE: {{person.dob.age}}</P>
             <p class="writings">DOB: {{prettyBirthday}}</P>
             <p class="writings">mailto: <a v-bind:href="'mailto:'+person.email">{{person.email}}</a></p>
+            <form v-on:submit.prevent="fetchUserData">
+              <button type="submit">Refresh</button>
+            </form>
         </div>
       <br>
       <br>
@@ -75,12 +78,11 @@
       <br>
       <br>
       <br>
-      <br>
       <hr>
       <p>MY name is {{person.name.first}}, welcome to my website</p>
     </main> 
     <footer>
-      <p>Author: Esh </p>
+      <p>Author: Eshwar Jayaprakash </p>
       <p>phone number: (763)334-4308</p>
       <!-- https://www.w3schools.com/tags/tag_footer.asp -->
     </footer> 
