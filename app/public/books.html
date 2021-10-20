@@ -8,13 +8,16 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+
     <title>fake User</title>
   </head>
+
   <body>
+
     <header>
-      <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script> -->
-      
       
       <div class="div1">
         <nav id="navbar_main" class="navbar navbar-expand-lg navbar-light bg-light">
@@ -46,9 +49,9 @@
         </nav>
       </div>  
     </header>
-    <main class="main">
-
-        <table id="sortytab" class="table">
+    
+    <main id="bookApp" class="main">
+        <table class="table"> 
             <thead>
               <tr>
                 <th scope="col" class="writings">Serial number</th>
@@ -61,90 +64,48 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row" class="writings">1</th>
-                <td class="writings">In five years>
-                <td class="writings">Rebecca Serle</td>
-                <td class="writings">2021</td>
-                <td class="writings">Atria Books</td>
-                <td class="writings">288</td>
-                <td class="writings">$12.99</td>
-              </tr>
-              <tr>
-                <th scope="row" class="writings">2</th>
-                <td class="writings">Beach read</td>
-                <td class="writings">Emily henry</td>
-                <td class="writings">2020</td>
-                <td class="writings">Penguin publishing group</td>
-                <td class="writings">384</td>
-                <td class="writings">$8.99</td>
-              </tr>
-              <tr>
-                <th scope="row" class="writings">3</th>
-                <td class="writings">Punk 57</td>
-                <td class="writings">Penelope Douglas</td>
-                <td class="writings">2016</td>
-                <td class="writings">Createspace independent publishing</td>
-                <td class="writings">341</td>
-                <td class="writings">$13.99</td>
-              </tr>
-              <tr>
-                <th scope="row" class="writings">4</th>
-                <td class="writings">Ugly love</td>
-                <td class="writings">Colleen Hoover</td>
-                <td class="writings">2014</td>
-                <td class="writings">Atria Books</td>
-                <td class="writings">336</td>
-                <td class="writings">$10.99</td>
-              </tr>
-              <tr>
-                <th scope="row" class="writings">5</th>
-                <td class="writings">Credence</td>
-                <td class="writings">Penelope Douglas</td>
-                <td class="writings">2020</td>
-                <td class="writings">Independently published</td>
-                <td class="writings">485</td>
-                <td class="writings">$17.99</td>
+              <tr v-for="book in books">
+                <td>{{book.Serialnumber}}</td>
+                <td>{{ book.Title}}</td>
+                <td>{{ book.Author}}</td>
+                <td>{{ book.YearPublished}}</td>
+                <td>{{ book.Publisher}}</td>
+                <td>{{ book.Pagecount}}</td>
+                <td>{{ book.Msrp}}</td>
               </tr>
             </tbody>
         </table>
 
-    
-
         <!-- https://getbootstrap.com/docs/5.1/content/tables/ -->
-        <form>
+        <form v-on:submit ="postNewBook">
           <div class="mb-3">
             <div class='col-md-6'>
-            <label for="Serial" id="label" >Serial number</label>
-            <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="serial number">
-            <label for="Serial" class="form-label">Title</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="title">
-            <label for="Serial" class="form-label">Author</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="author">
-            <label for="Serial" class="form-label">Year Published</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="year published">
-            <label for="Serial" class="form-label">Publisher</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="publisher">
-            <label for="Serial" class="form-label">Page Count</label>
-            <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="page count">
-            <label for="Serial" class="form-label">MSRP</label>
-            <input type="number" class="form-control" id="exampleFormControlInput1" placeholder="MSRP">
-            <input type="submit" value="Submit">
-         </div>
+              <label for="Title" class="form-label">Title</label>
+              <input type="text" class="form-control" id="Title" v-model="booksform.Title">
+              <label for="Author" class="form-label">Author</label>
+              <input type="text" class="form-control" id="Author" v-model="booksform.Author">
+              <label for="YearPublished" class="form-label">Year Published</label>
+              <input type="text" class="form-control" id="YearPublished" v-model="booksform.YearPublished">
+              <label for="Publisher" class="form-label">Publisher</label>
+              <input type="text" class="form-control" id="Publisher" v-model="booksform.Publisher">
+              <label for="Pagecount" class="form-label">Page Count</label>
+              <input type="number" class="form-control" id="Pagecount" v-model="booksform.Pagecount">
+              <label for="Msrp" class="form-label">MSRP</label>
+              <input type="number" class="form-control" id="Msrp" v-model="booksform.Msrp">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </div>
         </form>
-    </div>
-    
+        <br>
+        <br>
     </main>
 
     <footer>
-        <p>Author: Donald Caldwell</p>
-        <p>phone number: (763)334-4308</p>
+        <p>Author: Eshwar Jayaprakash</p>
         <!-- https://www.w3schools.com/tags/tag_footer.asp -->
     </footer> 
-    <script src="js/tablesort.min.js"></script>
-    <script>
-      /* <!-- tablesort plugin from http://tristen.ca/tablesort/demo/--> */
-      new Tablesort(document.getElementById('sortytab'));
-    </script>
+
+    <script src="js/book.js"></script>
+    <!-- <script src="js/tablesort.min.js"></script> -->
  </body>
 </html>
